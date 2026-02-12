@@ -30,7 +30,7 @@ app.post("/", (req, res) => {
     console.log("New message received from " + sender + " at " + new Date().toISOString());
 });
 
-const fs = require("fs");
+
 
 app.get("/quotes", (req, res) => {
   const quotes = JSON.parse(
