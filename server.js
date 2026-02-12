@@ -30,4 +30,18 @@ app.post("/", (req, res) => {
     console.log("New message received from " + sender + " at " + new Date().toISOString());
 });
 
+const fs = require("fs");
+
+app.get("/quotes", (req, res) => {
+  const quotes = JSON.parse(
+    fs.readFileSync("./data/quotes.json", "utf8")
+  );
+
+  const randomQuote =
+    quotes[Math.floor(Math.random() * quotes.length)];
+
+  res.json({ quote: randomQuote });
+});
+
+
 app.listen(3000, () => console.log("Messages server running on port 3000"));
