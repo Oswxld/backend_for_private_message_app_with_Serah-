@@ -16,6 +16,7 @@ if (!fs.existsSync(MESSAGES_FILE)) fs.writeFileSync(MESSAGES_FILE, "[]");
 app.get("/messages", (req, res) => {
   const messages = JSON.parse(fs.readFileSync(MESSAGES_FILE));
   res.json(messages);
+  console.log("Messages sent to client at " + new Date().toISOString());
 });
 
 // Add a new message
@@ -26,6 +27,7 @@ app.post("/messages", (req, res) => {
   messages.push(newMessage);
   fs.writeFileSync(MESSAGES_FILE, JSON.stringify(messages, null, 2));
   res.json(newMessage);
+    console.log("New message received from " + sender + " at " + new Date().toISOString());
 });
 
 app.listen(3000, () => console.log("Messages server running on port 3000"));
