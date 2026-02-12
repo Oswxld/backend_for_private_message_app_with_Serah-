@@ -13,14 +13,14 @@ const MESSAGES_FILE = "messages.json";
 if (!fs.existsSync(MESSAGES_FILE)) fs.writeFileSync(MESSAGES_FILE, "[]");
 
 // Get all messages
-app.get("/messages", (req, res) => {
+app.get("/", (req, res) => {
   const messages = JSON.parse(fs.readFileSync(MESSAGES_FILE));
   res.json(messages);
   console.log("Messages sent to client at " + new Date().toISOString());
 });
 
 // Add a new message
-app.post("/messages", (req, res) => {
+app.post("/", (req, res) => {
   const messages = JSON.parse(fs.readFileSync(MESSAGES_FILE));
   const { sender, text } = req.body;
   const newMessage = { sender, text, time: new Date().toISOString() };
