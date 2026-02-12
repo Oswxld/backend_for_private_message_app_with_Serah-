@@ -41,6 +41,7 @@ app.get("/quotes", (req, res) => {
     quotes[Math.floor(Math.random() * quotes.length)];
 
   res.json({ quote: randomQuote });
+  console.log("Quote sent to client at " + new Date().toISOString());
 });
 
 
