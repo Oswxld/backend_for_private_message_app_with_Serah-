@@ -37,12 +37,16 @@ app.get("/quotes", (req, res) => {
     fs.readFileSync("./data/quotes.json", "utf8")
   );
 
-  const randomQuote =
-    quotes[Math.floor(Math.random() * quotes.length)];
+  // pick random quote
+  let randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  // sanitize: remove invisible/control chars & trim
+  randomQuote = randomQuote.replace(/[\u0000-\u001F\u007F]/g, "").trim();
 
   res.json({ quote: randomQuote });
   console.log("Quote sent to client at " + new Date().toISOString());
 });
+
 
 
 app.listen(3000, () => console.log("Messages server running on port 3000"));
